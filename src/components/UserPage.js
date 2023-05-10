@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
+import UserService from "../services/UserService";
 
 //onCreation complete of this Component. The first method react useEffect
 
@@ -10,7 +12,7 @@ const UserPage = () => {
     const [person, setPerson] = useState(null);
 
     useEffect(() =>{
-        loadUsersFromExternalAPI();
+        loadUsers();
     }, []);
 
     const loadUsersFromExternalAPI = async() =>
@@ -22,6 +24,15 @@ const UserPage = () => {
             }).catch(err => {
                 console.log(err);
             });
+
+            UserService.getAll().then(res =>{
+                setPersons(res.data);
+            })
+    }
+
+    const loadUsers = async() =>{
+        const persons = await UserService.getAll();
+        setPersons(persons?.data)
     }
 
     const selectClickHandler = (event, person) =>{
@@ -48,6 +59,12 @@ const UserPage = () => {
         }
     }
 
+    const deleteClickHandler = (event, id) =>{
+        UserService.remove(id).then(res=>{
+            
+        })
+    }
+
     return(
         <div className="container">
             <h3>Persons page.</h3>
@@ -57,12 +74,10 @@ const UserPage = () => {
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Username</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Website</th>
-                        <th>Address</th>
                         <th>Select</th>
+                        <th>Del.</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,12 +87,10 @@ const UserPage = () => {
                             <tr key={index}>
                                 <td>{item.id}</td>
                                 <td>{item.name}</td>
-                                <td>{item.username}</td>
                                 <td>{item.email}</td>
                                 <td>{item.phone}</td>
-                                <td>{item.website}</td>
-                                <td><span className="text-success">{item.address.street}, {item.address.city}</span></td>
                                 <td><button className="btn btn-primary btn-sm" onClick={(event) => selectClickHandler(event, item)}>Select</button></td>
+                                <td><button className="btn btn-danger btn-sm" onClick={(event) => deleteClickHandler(event, item?.id)}>Del.</button></td>
                             </tr>
                         );
                        })
