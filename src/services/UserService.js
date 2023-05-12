@@ -9,7 +9,7 @@ const get = (id) =>{
 }
 
 const create = (data) =>{
-    return http.post(`/users/user`, data);
+    return http.post(`/users/insertUser`, data);
 }
 
 const update = (id, data) => {
@@ -17,8 +17,9 @@ const update = (id, data) => {
 }
 
 const remove = (id) =>{
-
+    console.log(id);
     return http.post(`/users/deleteUser`, {id});
+    //return http.delete(`/users/deleteUser/${id}`);
 }
 
 const UserService = {

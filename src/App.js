@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import { Switch, Route, Link } from "react-router-dom";
-import UserPage from './components/UserPage';
+import UserPage from './components/user/UserPage';
 import Login from './components/Login';
 import TutorialList from './components/tutorials/TutorialList';
 import AddTutorial from './components/tutorials/AddTutrial';
+import UserForm from './components/user/UserForm';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
           <Route exact path="/users" component={UserPage} />
           <Route exact path="/tutorials" component={TutorialList} />
           <Route exact path="/addTutorial" component={AddTutorial} />
+          <Route exact path="/userForm" component={UserForm} />
         </Switch>
       </div>
 
