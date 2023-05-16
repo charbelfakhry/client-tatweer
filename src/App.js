@@ -5,6 +5,8 @@ import UserPage from './components/user/UserPage';
 import Login from './components/Login';
 import TutorialList from './components/tutorials/TutorialList';
 import AddTutorial from './components/tutorials/AddTutrial';
+import { ToastContainer} from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import UserForm from './components/user/UserForm';
 
 function App() {
@@ -41,6 +43,7 @@ function App() {
           <Route exact path="/addTutorial" component={AddTutorial} />
           <Route exact path="/userForm" component={UserForm} />
         </Switch>
+        <ToastContainer />
       </div>
 
 

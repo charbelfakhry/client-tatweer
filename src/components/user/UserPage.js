@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import UserService from "../../services/UserService";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,8 @@ const UserPage = () => {
 
     const [persons, setPersons] = useState([]);
     const [person, setPerson] = useState(null);
+
+    const history = useHistory();
 
     useEffect(() =>{
         loadUsers();
@@ -24,7 +26,7 @@ const UserPage = () => {
                 const persons = res.data;
                 setPersons(persons);
             }).catch(err => {
-                console.log(err);
+                toast.error("Failed to laod data");
             });
 
             UserService.getAll().then(res =>{
@@ -35,13 +37,13 @@ const UserPage = () => {
     const loadUsers = async() =>{
         const persons = await UserService.getAll();
         setPersons(persons?.data);
-        toast("test");
     }
 
     const selectClickHandler = (event, person) =>{
-        console.log(event.target);
-        console.log(person);
-        setPerson(person);
+        history.push({
+            pathname: `/userForm`,
+            state: {user: person}
+        });
     }
 
     const addNewRecord = () => {
