@@ -5,6 +5,7 @@ import {Link, useHistory} from "react-router-dom";
 import UserService from "../../services/UserService";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AiOutlineUserAdd, AiFillDelete, AiFillEdit } from "react-icons/ai";
 
 //onCreation complete of this Component. The first method react useEffect
 
@@ -79,7 +80,7 @@ const UserPage = () => {
         <div className="container">
             <h3>Persons page.</h3>
             {/* <button className="btn btn-secondary btn-sm" style={{float: "left"}} onClick={addNewRecord}>Insert</button> */}
-            <Link to="/userForm" className="btn btn-secondary btn-sm" style={{float: "left"}}>Insert User</Link>
+            <Link to="/userForm" className="btn btn-primary btn" style={{float: "left"}}><AiOutlineUserAdd/></Link>
             <table className="table w-100">
                 <thead>
                     <tr>
@@ -102,8 +103,8 @@ const UserPage = () => {
                                 <td>{item.lastName}</td>
                                 <td>{item.email}</td>
                                 <td>{item.phone}</td>
-                                <td><button className="btn btn-primary btn-sm" onClick={(event) => selectClickHandler(event, item)}>Update</button></td>
-                                <td><button className="btn btn-danger btn-sm" onClick={(event) => deleteClickHandler(event, item?.id)}>Del.</button></td>
+                                <td><button className="btn btn-success btn-sm" onClick={(event) => selectClickHandler(event, item)}><AiFillEdit /></button></td>
+                                <td><button className="btn btn-danger btn-sm" onClick={(event) => deleteClickHandler(event, item?.id)}><AiFillDelete /></button></td>
                             </tr>
                         );
                        })
