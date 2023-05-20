@@ -22,12 +22,17 @@ const remove = (id) =>{
     //return http.delete(`/users/deleteUser/${id}`);
 }
 
+const authenticate = (user) => {
+    return http.post(`/users/authenticateUser`, user);
+}
+
 const UserService = {
     getAll,
     get,
     create,
     update,
     remove,
+    authenticate,
 }
 
 export default UserService;

@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import {RiUserFill, RiLockPasswordFill} from 'react-icons/ri';
+import UserService from "../services/UserService";
+import { toast } from "react-toastify";
 
 const Login = ({ onLogin }) => {
 
@@ -7,16 +9,31 @@ const Login = ({ onLogin }) => {
     const [password, setPassword] = useState('');
 
 
-    const handleLogin = () =>{
+    const handleLogin = async() =>{
         if(username !== '' && password !== ''){
-
-            //
-            
-            onLogin();
+            const user = {
+                username,
+                password
+            }
+            const result = await UserService.authenticate({user});
+            if(result?.data === "Unauthenticated"){
+                toast.error("WRONG USERNAME/PASSWORD");
+                reset();
+            }else{
+                //local storage
+                const authenticatedUser = result?.data;
+                onLogin();
+            }
         }
     }
 
+    const reset = () => {
+        setUsername("");
+        setPassword("");
+    }
+
     return(
+        <>
         <div className="login-container">
             <h2>Login</h2>
             <hr style={{color: "#333", borderStyle: "dotted"}}/>
@@ -34,6 +51,7 @@ const Login = ({ onLogin }) => {
                 Login
             </button>
         </div>
+        </>
     )
 }
 
