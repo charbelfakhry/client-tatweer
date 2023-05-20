@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserForm from './components/user/UserForm';
 import { useState } from 'react';
+import DateTimeLabel from './utils/DateTimeLabel';
 
 function App() {
 
@@ -25,15 +26,14 @@ function App() {
   return (
     <div className="App">
       {isLoggedIn && (
-        <nav
-          className="navbar navbar-expand"
-          style={{ backgroundColor: "#3498db" }}
-        >
+        <div>
+        <DateTimeLabel />
+        <nav className="navbar navbar-expand" style={{ backgroundColor: "#3498db" }}>
           <a href="/" className="navbar-brand text-light">
             CodePact <span>{"</>"}&#60;/&#62;</span>
           </a>
           <div className="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
+            <ul className="navbar-nav ms-auto"> {/* Use ms-auto class here */}
               <li className="nav-item">
                 <Link to="/users" className="nav-link text-light">
                   Users
@@ -49,17 +49,16 @@ function App() {
                   Tutorials
                 </Link>
               </li>
-              <li className="nav-item">
-                <button
-                  className="btn btn-danger text-uppercase mx-auto smaller-logout-button"
-                  onClick={handleLogout}
-                >
-                  logout
-                </button>
-              </li>
             </ul>
+            <button
+              className="btn btn-danger text-uppercase mx-auto smaller-logout-button"
+              onClick={handleLogout}
+            >
+              logout
+            </button>
           </div>
         </nav>
+        </div>
       )}
       <div className='container mt-3'>
         <Switch>
