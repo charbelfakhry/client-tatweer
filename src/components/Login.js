@@ -22,6 +22,7 @@ const Login = ({ onLogin }) => {
             }else{
                 //local storage
                 const authenticatedUser = result?.data;
+                localStorage.setItem("user", JSON.stringify(authenticatedUser));
                 onLogin();
             }
         }

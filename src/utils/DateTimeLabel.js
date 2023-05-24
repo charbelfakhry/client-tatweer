@@ -7,7 +7,6 @@ const DateTimeLabel = (isMilitary) => {
     // 00:13:44 AM 5/20/2023;
 
     useEffect(()=>{
-        console.log(isMilitary);
         upateDateTime();
     }, []);
 
