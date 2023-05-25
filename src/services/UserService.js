@@ -26,6 +26,11 @@ const authenticate = (user) => {
     return http.post(`/users/authenticateUser`, user);
 }
 
+const loadRefernceTableInfo = (data) =>
+{
+    return http.post(`/user/loadRefernceTableInfo`, data)
+}
+
 const UserService = {
     getAll,
     get,
@@ -33,6 +38,7 @@ const UserService = {
     update,
     remove,
     authenticate,
+    loadRefernceTableInfo,
 }
 
 export default UserService;

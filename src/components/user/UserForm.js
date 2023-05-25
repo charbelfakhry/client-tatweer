@@ -3,6 +3,7 @@ import UserService from "../../services/UserService";
 import { useLocation } from 'react-router-dom';
 import {useHistory} from "react-router-dom";
 import { toast } from 'react-toastify';
+import CustDropdown from '../resuables/CustDropdown';
 
 
 
@@ -12,11 +13,18 @@ const UserForm = (user) =>{
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
+    const [countries, setCountries] = useState([]);
+    const [cities, setCities] = useState([]);
+
+    const [country, setCountry] = (null);
+    const [city, setCity] = (null);
 
     const location = useLocation();
     const history = useHistory();
 
     useEffect(()=>{
+        getCountries();
+        getCities();
         const person = location.state?.user;
         if(person){
             assignPerson(person);
@@ -58,6 +66,45 @@ const UserForm = (user) =>{
         setPhone('');
     }
 
+    const getCountries = async() => {
+        try{
+            let data = {
+                tableName: "ref_country",
+                value: "country_id",
+                label: "country_name",
+            }
+            const countries = await UserService.loadRefernceTableInfo(data);
+            setCountries(countries.data);
+        }catch(err){
+            console.log(err);
+            toast.error("error fetching countries.");
+        }
+    }
+
+    const getCities = async() => {
+        try{
+            let data = {
+                tableName: "ref_city",
+                value: "city_id",
+                label: "city_name",
+            }
+            const cities = UserService.loadRefernceTableInfo(data);
+            setCities(cities.data);
+        }catch(error){
+            toast.error("Error getting cities.")
+        }
+    }
+
+    const handleCityChange = (event) =>{
+        // implement handle city
+        setCity(event.taget.value);
+    }
+
+    const handleCountryChange = (event) =>{
+        // implement handle country
+        setCity(event.target.value);
+    }
+
     return(
         <div className='container w-75'>
             <h2>User Form</h2>
@@ -84,6 +131,18 @@ const UserForm = (user) =>{
                     <label htmlFor='phone' className='col-sm-2 col-form-label'>Phone</label>
                     <div className="col-sm-10">
                         <input className='form-control' type="text" id="phone" onChange={(e) => setPhone(e.target.value)} value={phone} />
+                    </div>
+                </div>
+                <div className='form-group row p-4'>
+                    <label htmlFor='country' className='col-sm-2 col-form-label'>Country</label>
+                    <div className="col-sm-10">
+                        <CustDropdown options={countries} onSelectedItem={handleCountryChange}/>
+                    </div>
+                </div>
+                <div className='form-group row p-4'>
+                    <label htmlFor='country' className='col-sm-2 col-form-label'>Cities</label>
+                    <div className="col-sm-10">
+                        <CustDropdown options={city} onSelectedItem={handleCityChange}/>
                     </div>
                 </div>
                 <div className='form-group p-4 row justify-content-center'>
