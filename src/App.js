@@ -13,6 +13,8 @@ import DateTimeLabel from './utils/DateTimeLabel';
 import { Dropdown } from 'react-bootstrap';
 import { FiLogOut, FiEdit } from "react-icons/fi";
 import Dashboard from './components/dashboard/Dashboard';
+import ProductTable from './components/prodcut/ProductTable';
+
 
 function App() {
 
@@ -71,7 +73,7 @@ function App() {
                 </li>
                 )}
                 <li className="nav-item">
-                  <Link to="/dashboard" className="nav-link text-light">
+                  <Link to="/products" className="nav-link text-light">
                     Products
                   </Link>
                 </li>
@@ -161,6 +163,7 @@ function App() {
               <Route exact path="/addTutorial" component={AddTutorial} />
               <Route exact path="/userForm" component={UserForm} />
               <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/products" component={ProductTable} />
             </>
           ) : (
             <Route exact path="/" render={() => <Login onLogin={handleLogin} />} />
