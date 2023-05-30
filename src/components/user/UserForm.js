@@ -3,7 +3,7 @@ import UserService from "../../services/UserService";
 import { useLocation } from 'react-router-dom';
 import {useHistory} from "react-router-dom";
 import { toast } from 'react-toastify';
-import CustDropdown from '../resuables/CustDropdown';
+
 
 
 
@@ -16,15 +16,15 @@ const UserForm = (user) =>{
     const [countries, setCountries] = useState([]);
     const [cities, setCities] = useState([]);
 
-    const [country, setCountry] = (null);
-    const [city, setCity] = (null);
+    const [country, setCountry] = ("");
+    const [city, setCity] = ("");
 
     const location = useLocation();
     const history = useHistory();
 
     useEffect(()=>{
-        getCountries();
-        getCities();
+        // getCountries();
+        // getCities();
         const person = location.state?.user;
         if(person){
             assignPerson(person);
@@ -136,13 +136,13 @@ const UserForm = (user) =>{
                 <div className='form-group row p-4'>
                     <label htmlFor='country' className='col-sm-2 col-form-label'>Country</label>
                     <div className="col-sm-10">
-                        <CustDropdown options={countries} onSelectedItem={handleCountryChange}/>
+                        {/* <CustDropdown options={countries} onSelectedItem={handleCountryChange}/> */}
                     </div>
                 </div>
                 <div className='form-group row p-4'>
                     <label htmlFor='country' className='col-sm-2 col-form-label'>Cities</label>
                     <div className="col-sm-10">
-                        <CustDropdown options={city} onSelectedItem={handleCityChange}/>
+                        {/* <CustDropdown options={city} onSelectedItem={handleCityChange}/> */}
                     </div>
                 </div>
                 <div className='form-group p-4 row justify-content-center'>

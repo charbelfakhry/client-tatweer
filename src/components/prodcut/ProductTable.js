@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductService from "../../services/ProductService";
+import Stack from '@mui/material/Stack';
+import Modal from "react-bootstrap/Modal";
 import {
   Table,
   TableBody,
@@ -9,6 +11,7 @@ import {
   TableRow,
   TablePagination,
   TableFooter,
+  Button,
 } from "@material-ui/core";
 
 
@@ -16,6 +19,8 @@ const ProductTable = (props) => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [showModal, setShowModal] = useState(false);
+  const [productId, setProductId] = useState(0);
 
   useEffect(() => {
     fetchProducts();
@@ -40,6 +45,19 @@ const ProductTable = (props) => {
     setPage(0);
   };
 
+  const handleDeleteProduct = (id) => {
+    setShowModal(true);
+    setProductId(id);
+  }
+
+  const handleConfirmDelete = async () => {
+    
+    await ProductService.remove(productId);
+    setShowModal(false);
+    fetchProducts();
+
+  }
+
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, products.length - page * rowsPerPage);
 
@@ -62,13 +80,14 @@ const ProductTable = (props) => {
             {products
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((product) => (
-                <TableRow key={product.id}>
+                <TableRow key={product.product_id}>
                   <TableCell>{product.product_name}</TableCell>
                   <TableCell>{product.product_desc}</TableCell>
                   <TableCell>{product.product_price}</TableCell>
                   <TableCell>{product.product_qty}</TableCell>
                   <TableCell>{product.category_name}</TableCell>
                   <TableCell>{product.supplier_name}</TableCell>
+                  <TableCell><Button variant="contained" color="error" onClick={()=>{handleDeleteProduct(product.product_id)}}>Del.</Button></TableCell>
                 </TableRow>
               ))}
           </TableBody>
@@ -97,6 +116,26 @@ const ProductTable = (props) => {
           </TableRow>
         </TableFooter>
       </TableContainer>
+      
+
+            <Modal show={showModal} onHide={() => setShowModal(false)}>
+              {" "}
+              <Modal.Header closeButton>
+                <Modal.Title>Confirm </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Are you sure you want to delete ?</Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                  No
+                </Button>
+                <Button variant="danger" onClick={() => {handleConfirmDelete()}}>
+                  Yes
+                </Button>
+              </Modal.Footer>
+            </Modal>
+
+
+
     </>
   );
 };
