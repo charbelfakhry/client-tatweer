@@ -14,6 +14,7 @@ import { Dropdown } from 'react-bootstrap';
 import { FiLogOut, FiEdit } from "react-icons/fi";
 import Dashboard from './components/dashboard/Dashboard';
 import ProductTable from './components/prodcut/ProductTable';
+import Category from './components/category/Category';
 
 
 function App() {
@@ -88,7 +89,7 @@ function App() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/dashboard" className="nav-link text-light">
+                  <Link to="/categories" className="nav-link text-light">
                     Categories
                   </Link>
                 </li>
@@ -164,6 +165,7 @@ function App() {
               <Route exact path="/userForm" component={UserForm} />
               <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/products" component={ProductTable} />
+              <Route exact path="/categories" component={Category} />
             </>
           ) : (
             <Route exact path="/" render={() => <Login onLogin={handleLogin} />} />
