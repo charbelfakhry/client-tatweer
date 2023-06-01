@@ -2,14 +2,18 @@ import React from "react";
 
 const CustTable = ({ data }) => {
 
+    if(!data || !data.length){
+        return null;
+    }
+
     const renderHeaders = () => {
         const columns = Object.keys(data[0]);
             return (
-              <th>
+              <>
                 {columns.map((column, index) => (
                   <th key={index}>{column}</th>
                 ))}
-              </th>
+              </>
             );  
     }
 
@@ -25,7 +29,7 @@ const CustTable = ({ data }) => {
 
     return (
         <React.Fragment>
-            <table>
+            <table className="table">
                 <thead>
                     <tr>{renderHeaders()}</tr>
                 </thead>
