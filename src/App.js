@@ -15,6 +15,7 @@ import { FiLogOut, FiEdit } from "react-icons/fi";
 import Dashboard from './components/dashboard/Dashboard';
 import ProductTable from './components/prodcut/ProductTable';
 import Category from './components/category/Category';
+import Typyicode from './components/Typyicode';
 
 
 function App() {
@@ -98,6 +99,11 @@ function App() {
                     Invoice
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/typyicode" className="nav-link text-light">
+                    TYPYICODE EXT.
+                  </Link>
+                </li>
                 <li className="nav-item dropdown">
                 <button
                   className="nav-link dropdown-toggle btn btn-link text-light"
@@ -166,6 +172,7 @@ function App() {
               <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/products" component={ProductTable} />
               <Route exact path="/categories" component={Category} />
+              <Route exact path="/typyicode" component={Typyicode} />
             </>
           ) : (
             <Route exact path="/" render={() => <Login onLogin={handleLogin} />} />
