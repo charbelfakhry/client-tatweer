@@ -59,7 +59,6 @@ const ResizableDiv = () => {
     };
 
     const onMouseDownRightResize = (event) => {
-        console.log(event);
       xCord = event.clientX;
       updateStyles();
       resizableElement.style.left = styles.left;
