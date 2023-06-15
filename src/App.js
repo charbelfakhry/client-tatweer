@@ -16,6 +16,7 @@ import ProductTable from "./components/prodcut/ProductTable";
 import Category from "./components/category/Category";
 import Typyicode from "./components/Typyicode";
 import ResizableDiv from "./components/resizable/ResizableDiv";
+import DesktopNotification from "./components/notifications/DesktopNotification";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -80,6 +81,11 @@ function App() {
                 id="navbarNav"
               >
                 <ul className="navbar-nav ms-auto">
+                  <li className="nav-item">
+                    <Link to="/desktopNotification" className="nav-link text-light">
+                      Desktop Not.
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <Link to="/dashboard" className="nav-link text-light">
                       Dashboard
@@ -175,6 +181,7 @@ function App() {
               <Route exact path="/categories" component={Category} />
               <Route exact path="/typyicode" component={Typyicode} />
               <Route exact path="/resizableDiv" component={ResizableDiv} />
+              <Route exact path="/desktopNotification" component={DesktopNotification} />
             </>
           ) : (
             <Route
