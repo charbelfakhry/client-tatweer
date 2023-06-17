@@ -1,9 +1,6 @@
 import http from  "../http-common";
+import { getToken } from "../utils/UTILS";
 
-const getToken = () => {
-    const parsedUser = JSON.parse(localStorage.getItem("user"));
-    return parsedUser.token;
-  };
 
 const getAll = () => {
     return http.get("/users/getAllUsers", {
