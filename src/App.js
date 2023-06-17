@@ -17,6 +17,7 @@ import Category from "./components/category/Category";
 import Typyicode from "./components/Typyicode";
 import ResizableDiv from "./components/resizable/ResizableDiv";
 import DesktopNotification from "./components/notifications/DesktopNotification";
+import VideoPlayer from "./components/video/VideoPlayer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -81,6 +82,11 @@ function App() {
                 id="navbarNav"
               >
                 <ul className="navbar-nav ms-auto">
+                  <li className="nav-item">
+                    <Link to="/video" className="nav-link text-light">
+                      Video Player
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <Link to="/desktopNotification" className="nav-link text-light">
                       Desktop Not.
@@ -174,6 +180,7 @@ function App() {
             <>
               {isAdmin() && <Route exact path="/users" component={UserPage} />}
               <Route exact path="/tutorials" component={TutorialList} />
+              <Route exact path="/video" component={VideoPlayer} />
               <Route exact path="/addTutorial" component={AddTutorial} />
               <Route exact path="/userForm" component={UserForm} />
               <Route exact path="/dashboard" component={Dashboard} />
