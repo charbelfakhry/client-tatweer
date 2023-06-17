@@ -1,7 +1,16 @@
 import http from  "../http-common";
 
+const getToken = () => {
+    const parsedUser = JSON.parse(localStorage.getItem("user"));
+    return parsedUser.token;
+  };
+
 const getAll = () => {
-    return http.get("/users/getAllUsers");
+    return http.get("/users/getAllUsers", {
+        headers: {
+            Authorization: `Bearer ${getToken()}`
+        }
+    });
 }
 
 const get = (id) =>{
